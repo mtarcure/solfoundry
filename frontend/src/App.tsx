@@ -8,6 +8,8 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletProvider } from './components/wallet/WalletProvider';
 import { SiteLayout } from './components/layout/SiteLayout';
+import { ToastProvider } from './hooks/useToast';
+import { ToastContainer } from './components/common/ToastContainer';
 
 // ── Lazy-loaded page components ──────────────────────────────────────────────
 const BountiesPage = lazy(() => import('./pages/BountiesPage'));
@@ -82,7 +84,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <WalletProvider defaultNetwork="mainnet-beta">
-        <AppLayout />
+        <ToastProvider>
+          <AppLayout />
+          <ToastContainer />
+        </ToastProvider>
       </WalletProvider>
     </BrowserRouter>
   );
